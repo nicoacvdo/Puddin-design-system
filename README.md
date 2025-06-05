@@ -1,18 +1,17 @@
 # Puddin Design System
 
-A modern React component library based on Material Design 3.0 guidelines, built with TypeScript and Material-UI.
+A modern, accessible, and customizable design system built with React and Material-UI, featuring a beautiful swap interface and charting capabilities.
 
-## Features
+## 🚀 Features
 
-- 🎨 Material Design 3.0 compliant components
-- 🌓 Light and dark theme support
-- 📱 Responsive and accessible components
-- 📦 Tree-shakeable and optimized bundle
-- 📚 Comprehensive documentation with Storybook
-- 🔍 TypeScript support
-- 🧪 Tested components
+- **Modern UI Components**: Built with React and Material-UI
+- **TypeScript Support**: Full TypeScript support for better development experience
+- **Customizable Theme**: Easy to customize and extend
+- **Responsive Design**: Works on all screen sizes
+- **Accessibility**: Built with accessibility in mind
+- **Storybook Documentation**: Interactive documentation and component playground
 
-## Installation
+## 📦 Installation
 
 ```bash
 npm install puddin-design-system
@@ -20,22 +19,64 @@ npm install puddin-design-system
 yarn add puddin-design-system
 ```
 
-## Quick Start
+## 🎨 Usage
 
-```tsx
-import { Button, Card, theme } from 'puddin-design-system';
-import { ThemeProvider } from '@mui/material/styles';
+```jsx
+import { SwapWithChart } from 'puddin-design-system';
 
 function App() {
   return (
-    <ThemeProvider theme={theme}>
-      <Card variant="elevated">
-        <Button variant="filled">Click me</Button>
-      </Card>
-    </ThemeProvider>
+    <SwapWithChart />
   );
 }
 ```
+
+## 🛠️ Development
+
+1. Clone the repository:
+```bash
+git clone https://github.com/yourusername/puddin-design-system.git
+cd puddin-design-system
+```
+
+2. Install dependencies:
+```bash
+npm install
+# or
+yarn install
+```
+
+3. Start Storybook:
+```bash
+npm run storybook
+# or
+yarn storybook
+```
+
+4. Build the library:
+```bash
+npm run build
+# or
+yarn build
+```
+
+## 📚 Documentation
+
+Visit our [Storybook](https://your-storybook-url.com) for detailed documentation and interactive examples.
+
+## 🤝 Contributing
+
+We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) for details.
+
+## 📝 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 🙏 Acknowledgments
+
+- [Material-UI](https://mui.com/)
+- [Recharts](https://recharts.org/)
+- [Storybook](https://storybook.js.org/)
 
 ## Available Components
 
@@ -96,42 +137,6 @@ import { ThemeProvider } from '@mui/material/styles';
 </ThemeProvider>
 ```
 
-## Development
-
-1. Clone the repository:
-```bash
-git clone https://github.com/yourusername/puddin-design-system.git
-cd puddin-design-system
-```
-
-2. Install dependencies:
-```bash
-npm install
-# or
-yarn install
-```
-
-3. Start development server:
-```bash
-npm start
-# or
-yarn start
-```
-
-4. Run Storybook:
-```bash
-npm run storybook
-# or
-yarn storybook
-```
-
-5. Build the library:
-```bash
-npm run build
-# or
-yarn build
-```
-
 ## Project Structure
 
 ```
@@ -147,14 +152,6 @@ puddin-design-system/
 ├── dist/             # Build output
 └── types/            # TypeScript type definitions
 ```
-
-## Contributing
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
 
 ## Testing
 

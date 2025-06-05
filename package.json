@@ -14,8 +14,31 @@
     "test": "jest",
     "lint": "eslint src --ext .ts,.tsx",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "prepare": "npm run build",
+    "prepublishOnly": "npm run lint && npm run test",
+    "preversion": "npm run lint",
+    "version": "npm run format && git add -A src",
+    "postversion": "git push && git push --tags"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yourusername/puddin-design-system.git"
+  },
+  "keywords": [
+    "react",
+    "material-ui",
+    "design-system",
+    "components",
+    "ui",
+    "typescript"
+  ],
+  "author": "Your Name <your.email@example.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/yourusername/puddin-design-system/issues"
+  },
+  "homepage": "https://github.com/yourusername/puddin-design-system#readme",
   "peerDependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
