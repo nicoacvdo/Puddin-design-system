@@ -62,7 +62,7 @@ yarn build
 
 ## 📚 Documentation
 
-Visit our [Storybook](https://your-storybook-url.com) for detailed documentation and interactive examples.
+Visit our [Storybook](https://nicoacvdo.github.io/Puddin-design-system/) for detailed documentation and interactive examples.
 
 ## 🤝 Contributing
 

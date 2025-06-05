@@ -13,6 +13,16 @@ const config: StorybookConfig = {
   "framework": {
     "name": "@storybook/react-vite",
     "options": {}
-  }
+  },
+  docs: {
+    autodocs: "tag",
+  },
+  staticDirs: ['../public'],
+  // Add base path for GitHub Pages
+  managerHead: (head) => `
+    ${head}
+    <base href="/Puddin-design-system/" />
+  `,
 };
+
 export default config;
