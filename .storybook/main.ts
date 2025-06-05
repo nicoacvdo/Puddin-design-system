@@ -7,22 +7,22 @@ const config: StorybookConfig = {
   ],
   "addons": [
     "@storybook/addon-onboarding",
-    "@storybook/addon-docs",
-    "@storybook/addon-viewport"
+    "@storybook/addon-docs"
   ],
   "framework": {
     "name": "@storybook/react-vite",
     "options": {}
   },
   docs: {
-    autodocs: "tag",
+    autodocs: true
   },
   staticDirs: ['../public'],
-  // Add base path for GitHub Pages
-  managerHead: (head) => `
-    ${head}
-    <base href="/Puddin-design-system/" />
-  `,
+  viteFinal: async (config) => {
+    return {
+      ...config,
+      base: '/',
+    };
+  },
 };
 
 export default config;
