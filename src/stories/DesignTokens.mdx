@@ -1,0 +1,417 @@
+import { Meta, ColorPalette, ColorItem } from '@storybook/blocks';
+import { Box, Typography, Paper, Grid, Stack } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
+
+<Meta title="Design System/Design Tokens" />
+
+# Design Tokens
+
+This page documents the design tokens used throughout the Puddin Design System. These tokens are exported from Figma and implemented in our Material-UI theme.
+
+## Token Naming Conventions
+
+Our design tokens follow a systematic naming convention to ensure consistency and clarity:
+
+### Color Tokens
+```
+{category}.{element}.{state}
+```
+- **Category**: primary, secondary, surface, text, outline
+- **Element**: main, light, dark, container
+- **State**: (optional) hover, active, disabled
+
+Examples:
+- `primary.main` - Main primary color
+- `surface.container.high` - High elevation container
+- `text.secondary` - Secondary text color
+
+### Typography Tokens
+```
+{component}.{variant}
+```
+- **Component**: h1, h2, h3, h4, body1, body2, button, caption
+- **Variant**: (optional) primary, secondary
+
+Examples:
+- `h1` - Main heading
+- `body1.primary` - Primary body text
+- `button` - Button text
+
+### Spacing Tokens
+```
+spacing.{multiplier}
+```
+- **Multiplier**: 0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 5, 6, 7, 8
+
+Examples:
+- `spacing(1)` - 8px
+- `spacing(2)` - 16px
+- `spacing(3)` - 24px
+
+### Border Radius Tokens
+```
+shape.borderRadius.{size}
+```
+- **Size**: none, small, medium, large, xl, xxl, round
+
+Examples:
+- `shape.borderRadius.medium` - 8px radius
+- `shape.borderRadius.round` - Fully rounded
+
+### Elevation Tokens
+```
+shadows[{level}]
+```
+- **Level**: 0-5
+
+Examples:
+- `shadows[1]` - Light elevation
+- `shadows[3]` - High elevation
+
+## Color System
+
+Our color system follows Material Design 3 principles and is organized into semantic categories:
+
+### Primary Colors
+- Used for primary actions, key UI elements, and brand identity
+- Includes main, light, and dark variants
+
+### Secondary Colors
+- Used for secondary actions and supporting UI elements
+- Includes main, light, and dark variants
+
+### Surface Colors
+- Used for container backgrounds and elevation levels
+- Includes main, dim, bright, and container variants
+
+### Text Colors
+- Used for typography and text elements
+- Includes primary and secondary variants
+
+### Outline Colors
+- Used for borders and dividers
+- Includes main and variant colors
+
+## Color Palette
+
+<ColorPalette>
+  <ColorItem
+    title="Primary"
+    colors={{
+      main: '#26a69a',
+      light: '#64d8cb',
+      dark: '#00766c',
+    }}
+  />
+  <ColorItem
+    title="Secondary"
+    colors={{
+      main: '#ef5350',
+      light: '#ff867c',
+      dark: '#b61827',
+    }}
+  />
+  <ColorItem
+    title="Surface"
+    colors={{
+      main: '#2d2d2d',
+      dim: '#1a1a1a',
+      bright: '#2d2d2d',
+      'container.lowest': '#1a1a1a',
+      'container.low': '#1a1a1a',
+      'container.main': '#2d2d2d',
+      'container.high': '#2d2d2d',
+      'container.highest': '#2d2d2d',
+    }}
+  />
+  <ColorItem
+    title="Text"
+    colors={{
+      primary: '#ffffff',
+      secondary: 'rgba(255, 255, 255, 0.7)',
+    }}
+  />
+  <ColorItem
+    title="Outline"
+    colors={{
+      main: 'rgba(255, 255, 255, 0.12)',
+      variant: 'rgba(255, 255, 255, 0.12)',
+    }}
+  />
+</ColorPalette>
+
+## Typography System
+
+Our typography system follows Material Design 3 principles with custom adjustments for our brand:
+
+### Font Families
+- Primary: Roboto
+- Monospace: Roboto Mono (for code and numbers)
+
+### Type Scale
+```tsx
+typography: {
+  h1: {
+    fontSize: '32px',
+    lineHeight: '40px',
+    fontWeight: 400,
+    letterSpacing: '0px',
+  },
+  h2: {
+    fontSize: '28px',
+    lineHeight: '36px',
+    fontWeight: 400,
+    letterSpacing: '0px',
+  },
+  h3: {
+    fontSize: '24px',
+    lineHeight: '32px',
+    fontWeight: 400,
+    letterSpacing: '0px',
+  },
+  h4: {
+    fontSize: '22px',
+    lineHeight: '28px',
+    fontWeight: 400,
+    letterSpacing: '0px',
+  },
+  body1: {
+    fontSize: '16px',
+    lineHeight: '24px',
+    fontWeight: 400,
+    letterSpacing: '0.15px',
+  },
+  body2: {
+    fontSize: '14px',
+    lineHeight: '20px',
+    fontWeight: 400,
+    letterSpacing: '0.25px',
+  },
+  button: {
+    fontSize: '14px',
+    lineHeight: '20px',
+    fontWeight: 500,
+    letterSpacing: '0.1px',
+    textTransform: 'none',
+  },
+  caption: {
+    fontSize: '12px',
+    lineHeight: '16px',
+    fontWeight: 400,
+    letterSpacing: '0.4px',
+  },
+}
+```
+
+## Spacing System
+
+Our spacing system uses an 8px base unit with a consistent scale:
+
+```tsx
+spacing: {
+  0: '0px',
+  0.5: '4px',
+  1: '8px',
+  1.5: '12px',
+  2: '16px',
+  2.5: '20px',
+  3: '24px',
+  3.5: '28px',
+  4: '32px',
+  5: '40px',
+  6: '48px',
+  7: '56px',
+  8: '64px',
+}
+```
+
+### Usage Examples
+```tsx
+// Padding
+padding: theme.spacing(2) // 16px
+padding: theme.spacing(1, 2) // 8px vertical, 16px horizontal
+padding: theme.spacing(1, 2, 3, 4) // 8px top, 16px right, 24px bottom, 32px left
+
+// Margin
+margin: theme.spacing(2) // 16px
+margin: theme.spacing(1, 2) // 8px vertical, 16px horizontal
+
+// Gap
+gap: theme.spacing(2) // 16px
+```
+
+## Border Radius
+
+Our border radius system follows a consistent scale:
+
+```tsx
+shape: {
+  borderRadius: {
+    none: '0px',
+    small: '4px',
+    medium: '8px',
+    large: '12px',
+    xl: '16px',
+    xxl: '20px',
+    round: '9999px',
+  }
+}
+```
+
+### Usage Examples
+```tsx
+// Buttons
+borderRadius: '20px' // Standard button radius
+
+// Cards
+borderRadius: theme.shape.borderRadius.medium // 8px
+
+// Inputs
+borderRadius: theme.shape.borderRadius.large // 12px
+
+// Chips
+borderRadius: theme.shape.borderRadius.round // Fully rounded
+```
+
+## Elevation System
+
+Our elevation system uses shadows to create depth:
+
+```tsx
+shadows: {
+  0: 'none',
+  1: '0px 1px 2px rgba(0, 0, 0, 0.3), 0px 1px 3px 1px rgba(0, 0, 0, 0.15)',
+  2: '0px 1px 2px rgba(0, 0, 0, 0.3), 0px 2px 6px 2px rgba(0, 0, 0, 0.15)',
+  3: '0px 4px 8px 3px rgba(0, 0, 0, 0.15), 0px 1px 3px rgba(0, 0, 0, 0.3)',
+  4: '0px 6px 10px 4px rgba(0, 0, 0, 0.15), 0px 2px 3px rgba(0, 0, 0, 0.3)',
+  5: '0px 8px 12px 6px rgba(0, 0, 0, 0.15), 0px 4px 4px rgba(0, 0, 0, 0.3)',
+}
+```
+
+### Usage Examples
+```tsx
+// Cards
+boxShadow: theme.shadows[1] // Light elevation
+boxShadow: theme.shadows[2] // Medium elevation
+boxShadow: theme.shadows[3] // High elevation
+
+// Buttons
+boxShadow: theme.shadows[1] // Default
+boxShadow: theme.shadows[2] // Hover state
+```
+
+## Component-Specific Tokens
+
+### Buttons
+- Primary buttons use `primary.main`
+- Secondary buttons use `secondary.main`
+- Text buttons use `text.primary`
+- Border radius: `20px`
+- Padding: `10px 24px`
+- Typography: `button` variant
+
+### Cards
+- Card backgrounds use `surface.main`
+- Card borders use `outline.main`
+- Border radius: `8px`
+- Padding: `24px`
+- Elevation: `shadows[1]`
+
+### Text Fields
+- Input backgrounds use `surface.container.high`
+- Input borders use `outline.main`
+- Text uses `text.primary`
+- Placeholder text uses `text.secondary`
+- Border radius: `12px`
+- Padding: `12px 16px`
+
+### Navigation
+- Navigation bar background uses `surface.main`
+- Navigation bar border uses `outline.main`
+- Active items use `text.primary`
+- Inactive items use `text.secondary`
+- Height: `64px` (standard), `152px` (large)
+- Padding: `0 16px`
+
+## Best Practices
+
+1. **Use Semantic Colors**: Always use semantic color tokens instead of hardcoded values
+2. **Maintain Hierarchy**: Follow the established color hierarchy for consistent UI
+3. **Consider Accessibility**: Ensure sufficient contrast ratios between text and background colors
+4. **Theme Support**: All colors support both light and dark themes
+5. **Container Usage**: Use appropriate container colors based on elevation needs
+6. **Consistent Spacing**: Use the spacing scale for consistent layout
+7. **Typography Scale**: Follow the type scale for consistent text hierarchy
+8. **Border Radius**: Use the appropriate border radius for each component type
+9. **Elevation**: Use shadows consistently to create visual hierarchy
+
+### Visual Examples
+
+#### Color Examples
+<Box sx={{ p: 3, bgcolor: 'surface.main', borderRadius: 2, mb: 3 }}>
+  <Typography variant="h4" color="primary.main" gutterBottom>
+    Primary Text
+  </Typography>
+  <Typography variant="body1" color="text.secondary">
+    Secondary Text
+  </Typography>
+  <Box sx={{ mt: 2, p: 2, bgcolor: 'surface.container.high', borderRadius: 1 }}>
+    Container with High Elevation
+  </Box>
+</Box>
+
+#### Typography Examples
+<Box sx={{ p: 3, bgcolor: 'surface.main', borderRadius: 2, mb: 3 }}>
+  <Typography variant="h1" gutterBottom>Heading 1</Typography>
+  <Typography variant="h2" gutterBottom>Heading 2</Typography>
+  <Typography variant="h3" gutterBottom>Heading 3</Typography>
+  <Typography variant="h4" gutterBottom>Heading 4</Typography>
+  <Typography variant="body1" gutterBottom>
+    Body 1 - The quick brown fox jumps over the lazy dog
+  </Typography>
+  <Typography variant="body2" gutterBottom>
+    Body 2 - The quick brown fox jumps over the lazy dog
+  </Typography>
+  <Typography variant="button" gutterBottom>
+    Button Text
+  </Typography>
+  <Typography variant="caption" gutterBottom>
+    Caption Text
+  </Typography>
+</Box>
+
+#### Spacing Examples
+<Box sx={{ p: 3, bgcolor: 'surface.main', borderRadius: 2, mb: 3 }}>
+  <Stack spacing={2}>
+    <Box sx={{ p: 0.5, bgcolor: 'primary.main', color: 'white' }}>4px padding</Box>
+    <Box sx={{ p: 1, bgcolor: 'primary.main', color: 'white' }}>8px padding</Box>
+    <Box sx={{ p: 2, bgcolor: 'primary.main', color: 'white' }}>16px padding</Box>
+    <Box sx={{ p: 3, bgcolor: 'primary.main', color: 'white' }}>24px padding</Box>
+    <Box sx={{ p: 4, bgcolor: 'primary.main', color: 'white' }}>32px padding</Box>
+  </Stack>
+</Box>
+
+#### Border Radius Examples
+<Box sx={{ p: 3, bgcolor: 'surface.main', borderRadius: 2, mb: 3 }}>
+  <Stack spacing={2}>
+    <Box sx={{ p: 2, bgcolor: 'primary.main', color: 'white', borderRadius: 'none' }}>No Radius</Box>
+    <Box sx={{ p: 2, bgcolor: 'primary.main', color: 'white', borderRadius: 'small' }}>Small Radius</Box>
+    <Box sx={{ p: 2, bgcolor: 'primary.main', color: 'white', borderRadius: 'medium' }}>Medium Radius</Box>
+    <Box sx={{ p: 2, bgcolor: 'primary.main', color: 'white', borderRadius: 'large' }}>Large Radius</Box>
+    <Box sx={{ p: 2, bgcolor: 'primary.main', color: 'white', borderRadius: 'xl' }}>XL Radius</Box>
+    <Box sx={{ p: 2, bgcolor: 'primary.main', color: 'white', borderRadius: 'xxl' }}>XXL Radius</Box>
+    <Box sx={{ p: 2, bgcolor: 'primary.main', color: 'white', borderRadius: 'round' }}>Round</Box>
+  </Stack>
+</Box>
+
+#### Elevation Examples
+<Box sx={{ p: 3, bgcolor: 'surface.main', borderRadius: 2, mb: 3 }}>
+  <Stack spacing={3}>
+    <Paper sx={{ p: 2, boxShadow: 0 }}>No Elevation</Paper>
+    <Paper sx={{ p: 2, boxShadow: 1 }}>Light Elevation</Paper>
+    <Paper sx={{ p: 2, boxShadow: 2 }}>Medium Elevation</Paper>
+    <Paper sx={{ p: 2, boxShadow: 3 }}>High Elevation</Paper>
+    <Paper sx={{ p: 2, boxShadow: 4 }}>Higher Elevation</Paper>
+    <Paper sx={{ p: 2, boxShadow: 5 }}>Highest Elevation</Paper>
+  </Stack>
+</Box> 

@@ -13,6 +13,27 @@ export const theme = createTheme({
       default: '#1a1a1a',
       paper: '#2d2d2d',
     },
+    surface: {
+      main: '#2d2d2d',
+      dim: '#1a1a1a',
+      bright: '#2d2d2d',
+      container: {
+        lowest: '#1a1a1a',
+        low: '#1a1a1a',
+        main: '#2d2d2d',
+        high: '#2d2d2d',
+        highest: '#2d2d2d',
+      },
+    },
+    text: {
+      primary: '#ffffff',
+      secondary: 'rgba(255, 255, 255, 0.7)',
+    },
+    divider: 'rgba(255, 255, 255, 0.12)',
+    outline: {
+      main: 'rgba(255, 255, 255, 0.12)',
+      variant: 'rgba(255, 255, 255, 0.12)',
+    },
   },
   components: {
     MuiCssBaseline: {
@@ -35,4 +56,6 @@ export const theme = createTheme({
       },
     },
   },
-}); 
+});
+
+export { lightTheme, darkTheme }; 

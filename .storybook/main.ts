@@ -6,9 +6,8 @@ const config: StorybookConfig = {
     "../src/**/*.stories.@(js|jsx|mjs|ts|tsx)"
   ],
   "addons": [
-    "@storybook/addon-onboarding",
-    "@storybook/addon-docs",
-    "@storybook/addon-viewport"
+    "@storybook/addon-links",
+    "@storybook/addon-docs"
   ],
   "framework": {
     "name": "@storybook/react-vite",

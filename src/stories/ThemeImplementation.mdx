@@ -1,0 +1,204 @@
+import { Meta, Code } from '@storybook/blocks';
+
+<Meta title="Design System/Theme Implementation" />
+
+# Theme Implementation
+
+This page shows how the design tokens are implemented in our Material-UI theme configuration.
+
+## Theme Configuration
+
+Our theme is implemented using Material-UI's `createTheme` function. Here's the complete theme configuration:
+
+```tsx
+import { createTheme } from '@mui/material/styles';
+
+export const theme = createTheme({
+  palette: {
+    mode: 'dark',
+    primary: {
+      main: '#26a69a',
+    },
+    secondary: {
+      main: '#ef5350',
+    },
+    background: {
+      default: '#1a1a1a',
+      paper: '#2d2d2d',
+    },
+    surface: {
+      main: '#2d2d2d',
+      dim: '#1a1a1a',
+      bright: '#2d2d2d',
+      container: {
+        lowest: '#1a1a1a',
+        low: '#1a1a1a',
+        main: '#2d2d2d',
+        high: '#2d2d2d',
+        highest: '#2d2d2d',
+      },
+    },
+    text: {
+      primary: '#ffffff',
+      secondary: 'rgba(255, 255, 255, 0.7)',
+    },
+    divider: 'rgba(255, 255, 255, 0.12)',
+    outline: {
+      main: 'rgba(255, 255, 255, 0.12)',
+      variant: 'rgba(255, 255, 255, 0.12)',
+    },
+  },
+  components: {
+    MuiCssBaseline: {
+      styleOverrides: {
+        body: {
+          scrollbarColor: '#6b6b6b #2d2d2d',
+          '&::-webkit-scrollbar, & *::-webkit-scrollbar': {
+            backgroundColor: '#2d2d2d',
+          },
+          '&::-webkit-scrollbar-thumb, & *::-webkit-scrollbar-thumb': {
+            borderRadius: 8,
+            backgroundColor: '#6b6b6b',
+            minHeight: 24,
+            border: '3px solid #2d2d2d',
+          },
+          '&::-webkit-scrollbar-thumb:focus, & *::-webkit-scrollbar-thumb:focus': {
+            backgroundColor: '#959595',
+          },
+        },
+      },
+    },
+  },
+});
+```
+
+## Type Definitions
+
+To ensure type safety and proper TypeScript support, we extend Material-UI's theme types:
+
+```tsx
+import '@mui/material/styles';
+
+declare module '@mui/material/styles' {
+  interface Palette {
+    tertiary: Palette['primary'];
+    surface: {
+      main: string;
+      variant: string;
+      tint: string;
+    };
+    outline: {
+      main: string;
+      variant: string;
+    };
+  }
+  interface PaletteOptions {
+    tertiary?: PaletteOptions['primary'];
+    surface?: {
+      main: string;
+      variant: string;
+      tint: string;
+    };
+    outline?: {
+      main: string;
+      variant: string;
+    };
+  }
+}
+```
+
+## Usage in Components
+
+Here are some examples of how these tokens are used in our components:
+
+### Button Component
+```tsx
+const StyledButton = styled(MuiButton)(({ theme, variant = 'filled' }) => ({
+  borderRadius: '20px',
+  padding: '10px 24px',
+  textTransform: 'none',
+  ...(variant === 'filled' && {
+    backgroundColor: theme.palette.primary.main,
+    color: theme.palette.text.primary,
+  }),
+  ...(variant === 'outlined' && {
+    backgroundColor: 'transparent',
+    color: theme.palette.primary.main,
+    border: `1px solid ${theme.palette.outline.main}`,
+  }),
+}));
+```
+
+### TextField Component
+```tsx
+const StyledTextField = styled(MuiTextField)(({ theme, variant = 'outlined' }) => ({
+  '& .MuiOutlinedInput-root': {
+    backgroundColor: theme.palette.surface.container.high,
+    '& .MuiOutlinedInput-notchedOutline': {
+      borderColor: theme.palette.outline.main,
+    },
+  },
+  '& .MuiInputLabel-root': {
+    color: theme.palette.text.secondary,
+  },
+  '& .MuiInputBase-input': {
+    color: theme.palette.text.primary,
+  },
+}));
+```
+
+### Card Component
+```tsx
+const StyledCard = styled(MuiCard)(({ theme, variant = 'elevated' }) => ({
+  backgroundColor: theme.palette.surface.main,
+  border: variant === 'outlined' ? `1px solid ${theme.palette.outline.main}` : 'none',
+  borderRadius: theme.shape.borderRadius,
+}));
+```
+
+## Theme Provider Setup
+
+The theme is provided to the application using Material-UI's `ThemeProvider`:
+
+```tsx
+import { ThemeProvider } from '@mui/material/styles';
+import { theme } from './theme';
+
+const App = () => {
+  return (
+    <ThemeProvider theme={theme}>
+      {/* Your app components */}
+    </ThemeProvider>
+  );
+};
+```
+
+## Storybook Integration
+
+In Storybook, we use the theme in our stories:
+
+```tsx
+import { ThemeProvider } from '@mui/material/styles';
+import { theme } from '../theme';
+
+const meta = {
+  title: 'Components/Button',
+  component: Button,
+  decorators: [
+    (Story) => (
+      <ThemeProvider theme={theme}>
+        <Story />
+      </ThemeProvider>
+    ),
+  ],
+};
+```
+
+## Best Practices for Theme Usage
+
+1. **Use Theme Object**: Always access colors through the theme object
+2. **Consistent Naming**: Follow the established naming conventions
+3. **Type Safety**: Use TypeScript for better type checking
+4. **Component Styling**: Use styled components for consistent styling
+5. **Theme Extension**: Extend the theme when adding new tokens
+6. **Documentation**: Keep documentation up to date with theme changes 
