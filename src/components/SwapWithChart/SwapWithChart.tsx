@@ -4,7 +4,6 @@ import { Box, Paper, Typography, Stack, Divider, Grid, FormControl, Select, Menu
 import SwapVertIcon from '@mui/icons-material/SwapVert';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import Chip from '@mui/material/Chip';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts'; // Import recharts components
 
 // Import necessary components
 import NavigationBar from '../NavigationBar/NavigationBar';
@@ -13,6 +12,7 @@ import Button from '../Button/Button';
 import IconButton from '../IconButton/IconButton';
 import CryptoCard from '../CryptoCard/CryptoCard';
 import BottomNavigationBar from '../BottomNavigationBar/BottomNavigationBar';
+import TradingView from '../TradingView/TradingView';
 
 const SwapWithChartContainer = styled(Box)(({ theme }) => ({
   backgroundColor: theme.palette.surface.container.high, // Based on Figma style 710:5489
@@ -141,118 +141,25 @@ export const SwapWithChart: React.FC = () => {
     console.log(`${action} clicked`);
   };
 
-  // Mock data for recharts (SOL/USDT)
-  const mockChartData = [
-    { date: '2023-01-01', price: 10.5 },
-    { date: '2023-02-01', price: 12.3 },
-    { date: '2023-03-01', price: 11.8 },
-    { date: '2023-04-01', price: 14.2 },
-    { date: '2023-05-01', price: 15.0 },
-    { date: '2023-06-01', price: 13.5 },
-    { date: '2023-07-01', price: 16.8 },
-    { date: '2023-08-01', price: 17.5 },
-    { date: '2023-09-01', price: 16.0 },
-    { date: '2023-10-01', price: 18.2 },
-    { date: '2023-11-01', price: 19.5 },
-    { date: '2023-12-01', price: 21.0 },
-    { date: '2024-01-01', price: 22.5 },
-    { date: '2024-02-01', price: 24.0 },
-    { date: '2024-03-01', price: 23.0 },
-    { date: '2024-04-01', price: 25.5 },
-    { date: '2024-05-01', price: 26.8 },
-    { date: '2024-05-29', price: 27.1 }, // Today's approximate price
-  ];
-
   return (
     <SwapWithChartContainer>
-      {/* Using 'small' navVariant based on visual and available types, despite potential linter issue */}
       <NavigationBar navVariant="small" title="Label" />
 
       <ContentWrapper>
-        <ChartAndSwapArea container spacing={3}> {/* Spacing between grid items (24px) */}
-          <Grid item xs={12} md={8}> {/* Adjust grid size based on visual estimation */}
+        <ChartAndSwapArea container spacing={3}>
+          <Grid item xs={12} md={8}>
             <ChartContainer>
-              <Box sx={{ display: 'flex', alignItems: 'center', padding: theme.spacing(2) }}> {/* Padding around title and icon */}
-                 <Box sx={{ width: 24, height: 24, backgroundColor: theme.palette.primary.main, borderRadius: '50%', mr: 1 }} /> {/* Placeholder Icon */}
-                 <Typography variant="h6" color="text.primary">SOL - USDT</Typography> {/* Title text */}
+              <Box sx={{ display: 'flex', alignItems: 'center', padding: theme.spacing(2) }}>
+                <Box sx={{ width: 24, height: 24, backgroundColor: theme.palette.primary.main, borderRadius: '50%', mr: 1 }} />
+                <Typography variant="h6" color="text.primary">SOL - USDT</Typography>
               </Box>
-              {/* Recharts Line Chart */}
-              <ResponsiveContainer width="100%" height="100%">
-                <LineChart
-                  data={mockChartData}
-                  margin={{
-                    top: 20,
-                    right: 20,
-                    left: 0,
-                    bottom: 20,
-                  }}
-                >
-                  <CartesianGrid strokeDasharray="3 3" stroke={theme.palette.divider} opacity={0.3} />
-                  <XAxis 
-                    dataKey="date" 
-                    tick={{ 
-                      fill: theme.palette.text.secondary, 
-                      fontSize: theme.typography.caption.fontSize,
-                      fontFamily: theme.typography.fontFamily,
-                      fontWeight: theme.typography.caption.fontWeight,
-                    }} 
-                    axisLine={false} 
-                    tickLine={false}
-                    tickFormatter={(value) => {
-                      const date = new Date(value);
-                      return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
-                    }}
-                    padding={{ left: 10, right: 10 }}
-                  />
-                  <YAxis 
-                    tick={{ 
-                      fill: theme.palette.text.secondary, 
-                      fontSize: theme.typography.caption.fontSize,
-                      fontFamily: theme.typography.fontFamily,
-                      fontWeight: theme.typography.caption.fontWeight,
-                    }} 
-                    axisLine={false} 
-                    tickLine={false} 
-                    domain={['auto', 'auto']}
-                    tickFormatter={(value) => `$${value}`}
-                    padding={{ top: 10, bottom: 10 }}
-                  />
-                  <Tooltip 
-                    contentStyle={{ 
-                      backgroundColor: theme.palette.surface.container.main, 
-                      borderColor: theme.palette.divider, 
-                      borderRadius: theme.shape.borderRadius,
-                      boxShadow: theme.shadows[2],
-                    }} 
-                    itemStyle={{ 
-                      color: theme.palette.text.primary,
-                      fontSize: theme.typography.body2.fontSize,
-                      fontFamily: theme.typography.fontFamily,
-                    }} 
-                    labelStyle={{ 
-                      color: theme.palette.text.secondary,
-                      fontSize: theme.typography.caption.fontSize,
-                      fontFamily: theme.typography.fontFamily,
-                    }}
-                    formatter={(value: number) => [`$${value.toFixed(2)}`, 'Price']}
-                  />
-                  <Line 
-                    type="monotone" 
-                    dataKey="price" 
-                    stroke={theme.palette.primary.main} 
-                    strokeWidth={3} 
-                    dot={false} 
-                    activeDot={{ 
-                      r: 8, 
-                      stroke: theme.palette.primary.main, 
-                      strokeWidth: 2,
-                      fill: theme.palette.surface.main 
-                    }} 
-                  />
-                </LineChart>
-              </ResponsiveContainer>
+              <TradingView 
+                symbol="SOLUSDT"
+                theme={theme.palette.mode}
+                interval="1D"
+                containerId="tradingview_chart"
+              />
             </ChartContainer>
-
           </Grid>
 
           <Grid item xs={12} md={4}> {/* Adjust grid size based on visual estimation */}
@@ -418,9 +325,8 @@ export const SwapWithChart: React.FC = () => {
           </Grid>
         </ChartAndSwapArea>
       </ContentWrapper>
-      {/* Bottom Navigation Bar */}
       <Box sx={{ width: '100%', position: 'fixed', bottom: 0 }}>
-        <BottomNavigationBar value={0} onChange={() => {}} /> {/* Add state management for value and onChange later */}
+        <BottomNavigationBar value={0} onChange={() => {}} />
       </Box>
     </SwapWithChartContainer>
   );
